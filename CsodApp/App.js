@@ -1,12 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Button,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CsodAppFooter from "./Components/CsodAppFooter";
@@ -26,7 +19,7 @@ function MediaScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Media</Text>
       <Button title="Home" onPress={() => navigation.navigate("Home")} />
-      <CsodAppFooter style={styles.footer}></CsodAppFooter>
+      <CsodAppFooter></CsodAppFooter>
     </View>
   );
 }
