@@ -7,17 +7,40 @@ import {
   Button,
   Image,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import CsodAppFooter from "./Components/CsodAppFooter";
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Home</Text>
+      <Button title="Media" onPress={() => navigation.navigate("Media")} />
+      <CsodAppFooter></CsodAppFooter>
+    </View>
+  );
+}
+
+function MediaScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Media</Text>
+      <Button title="Home" onPress={() => navigation.navigate("Home")} />
+      <CsodAppFooter style={styles.footer}></CsodAppFooter>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const component = (
-    <Text style={styles.subTitle}>developed by CsodApp team</Text>
-  );
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>CsodApp</Text>
-      <StatusBar style="auto" />
-      {component}
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Media" component={MediaScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -32,5 +55,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     color: "#74bcc4",
+  },
+  footer: {
+    color: "green",
   },
 });
