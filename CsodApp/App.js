@@ -30,8 +30,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Media" component={MediaScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Media"
+          options={{ headerShown: false }}
+          component={MediaScreen}
+        />
+        <Stack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={HomeScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -48,8 +56,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     color: "#74bcc4",
-  },
-  footer: {
-    color: "green",
   },
 });
