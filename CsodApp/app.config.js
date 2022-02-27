@@ -1,25 +1,28 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 export default {
   expo: {
-    name: 'Expo Firebase Starter',
-    slug: 'expo-firebase',
-    privacy: 'public',
-    platforms: ['ios', 'android'],
-    version: '0.15.0',
-    orientation: 'portrait',
-    icon: './assets/flame.png',
+    name: "CsodApp",
+    slug: "csodapp",
+    privacy: "public",
+    platforms: ["ios", "android"],
+    version: "0.1.0",
+    orientation: "portrait",
+    icon: "./assets/acimlogo.png",
     splash: {
-      image: './assets/splash.png',
-      resizeMode: 'cover',
-      backgroundColor: '#F57C00'
+      image: "./assets/splash.png",
+      resizeMode: "cover",
+      backgroundColor: "#259DAD",
     },
     updates: {
-      fallbackToCacheTimeout: 0
+      fallbackToCacheTimeout: 0,
     },
-    assetBundlePatterns: ['**/*'],
+    assetBundlePatterns: ["**/*"],
     ios: {
-      supportsTablet: true
+      supportsTablet: true,
+    },
+    android: {
+      package: "com.csodapp.csodapp",
     },
     extra: {
       apiKey: process.env.API_KEY,
@@ -27,7 +30,7 @@ export default {
       projectId: process.env.PROJECT_ID,
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
-      appId: process.env.APP_ID
-    }
-  }
+      appId: process.env.APP_ID,
+    },
+  },
 };
