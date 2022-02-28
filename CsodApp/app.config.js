@@ -10,7 +10,7 @@ export default {
     orientation: "portrait",
     icon: "./assets/acimlogo.png",
     splash: {
-      image: "./assets/splash.png",
+      image: "./assets/acimlogo.png",
       resizeMode: "cover",
       backgroundColor: "#259DAD",
     },
