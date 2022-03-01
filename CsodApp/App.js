@@ -4,12 +4,16 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RootNavigator } from "./navigation/RootNavigator";
 import { CsodAppNavigator } from "./navigation/CsodAppNavigator";
 import { AuthenticatedUserProvider } from "./providers";
+import { StoreProvider } from "easy-peasy";
+import store from "./store/store";
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <CsodAppNavigator />
-    </SafeAreaProvider>
+    <StoreProvider store={store}>
+      <SafeAreaProvider>
+        <CsodAppNavigator />
+      </SafeAreaProvider>
+    </StoreProvider>
   );
 };
 

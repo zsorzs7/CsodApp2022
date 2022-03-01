@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Button, Text } from "react-native";
+import { View, StyleSheet, Button, Text, ScrollView } from "react-native";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import { StepUp } from "../components/StepUp";
 
 export const CsodAppHomeScreen = () => {
-  const [titles, setTitles] = useState(0);
+  const [titles, setTitles] = useState([]);
 
   const getTitles = async () => {
     const db = getFirestore();
-    const table = collection(db, "media");
+    const table = collection(db, "test4");
     const titleCollection = await getDocs(table);
     const titles = titleCollection.docs.map((doc) => doc.data());
+    titles.map((title, idx) => (title.index = idx));
     setTitles(titles);
   };
 
@@ -18,11 +20,15 @@ export const CsodAppHomeScreen = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <Button title="Sign Out" onPress={async () => getTitles()} />
-      <Text>{JSON.stringify(titles)}</Text>
-      <Button title="Bigyo" onPress={async () => setTitles(12)} />
-      <Text>-----</Text>
-      <Button title="CsodAppHomeScreen" onPress={async () => setTitles(12)} />
+      <ScrollView>
+        <Button title="Sign Out" onPress={async () => getTitles()} />
+        {titles.map((title, idx) => (
+          <Text key={idx}>
+            {title.title}: {title.text} : {title.index}
+          </Text>
+        ))}
+        <StepUp></StepUp>
+      </ScrollView>
     </View>
   );
 };

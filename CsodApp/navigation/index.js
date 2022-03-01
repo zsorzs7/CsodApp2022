@@ -1,4 +1,4 @@
-import { RootNavigator } from './RootNavigator';
-import { CsodAppNavigator } from './CsodAppNavigator';
+import { RootNavigator } from "./RootNavigator";
+import { CsodAppNavigator } from "./CsodAppNavigator";
 
 export { RootNavigator, CsodAppNavigator };
