@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import React, {useEffect, useState} from "react";
 import { View } from "./View";
 import { useStoreState, useStoreActions } from "easy-peasy";
@@ -9,7 +11,7 @@ export const StepUp = () => {
     const [tryCounter, setTryCounter] = useState(0);
     const [titles, setTitles] = useState({})
 
-    const todos = useStoreState((state) => state.todos);
+  const todos = useStoreState((state) => state.todos);
   const progress = useStoreState((state) => state.progress);
   const addTodo = useStoreActions((actions) => actions.addTodo);
   const addProgress = useStoreActions((actions) => actions.addProgress);

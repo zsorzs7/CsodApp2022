@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 

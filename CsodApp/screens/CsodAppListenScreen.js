@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button, Text } from "react-native";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";

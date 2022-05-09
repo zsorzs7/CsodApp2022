@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import React from 'react';
 import { View as RNView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

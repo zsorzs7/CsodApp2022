@@ -8,11 +8,11 @@ export default {
     platforms: ["ios", "android"],
     version: "0.1.0",
     orientation: "portrait",
-    icon: "./assets/acimlogo.png",
+    icon: "./assets/aclogo.png",
     splash: {
-      image: "./assets/acimlogo.png",
+      image: "./assets/splash.png",
       resizeMode: "cover",
-      backgroundColor: "#259DAD",
+      backgroundColor: "#ffffff",
     },
     updates: {
       fallbackToCacheTimeout: 0,
