@@ -4,7 +4,7 @@ import {useStoreState, useStoreActions} from "easy-peasy";
 import {AcFetchData} from "../components/AcFetchData";
 
 
-export const AcHomeScreen = () => {
+export const AcHomeScreen = ({ navigation }) => {
     const exercises = useStoreState((state) => state.exercises);
 
     return (
@@ -20,7 +20,7 @@ export const AcHomeScreen = () => {
                         APP
                     </Text>
                 </Text>
-                <Pressable style={styles.button} title="Kezdés">
+                <Pressable style={styles.button} onPress={() => {navigation.navigate('Progress')}}>
                     <Text style={styles.text}>Kurzus kezdése</Text>
                 </Pressable>
                 {/*{exercises.map((title, idx) => (*/}
@@ -35,7 +35,6 @@ export const AcHomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 40,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: "center",
