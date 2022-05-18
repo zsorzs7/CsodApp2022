@@ -18,5 +18,9 @@ export default createStore(
             state.exercises = exercises;
             state.exercises.map(exercise => exercise.store = 'store');
         }),
+        currentlyViewedExercise: 0,
+        setCurrentlyViewedExercise: action((state, exercise) => {
+            state.currentlyViewedExercise = exercise;
+        }),
     })
 );
