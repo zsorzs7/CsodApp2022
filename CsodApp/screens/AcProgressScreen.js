@@ -12,18 +12,18 @@ export const AcProgressScreen = ({navigation}) => {
         <View style={styles.container}>
             <AcFetchData></AcFetchData>
             <ScrollView>
-                <Image source={require('../assets/aclogo.png')}></Image>
-                <Text style={styles.logoTextParts}>
-                    <Text style={styles.logoTextPartsOne}>
-                        PROG
-                    </Text>
-                    <Text style={styles.logoTextPartsTwo}>
-                        RESS
-                    </Text>
-                </Text>
-                <Pressable style={styles.button} title="Kezdés">
-                    <Text style={styles.text}>Kurzus kezdése</Text>
-                </Pressable>
+                <Image></Image>
+                {/*<Text style={styles.logoTextParts}>*/}
+                {/*    <Text style={styles.logoTextPartsOne}>*/}
+                {/*        PROG*/}
+                {/*    </Text>*/}
+                {/*    <Text style={styles.logoTextPartsTwo}>*/}
+                {/*        RESS*/}
+                {/*    </Text>*/}
+                {/*</Text>*/}
+                {/*<Pressable style={styles.button} title="Kezdés">*/}
+                {/*    <Text style={styles.text}>Kurzus kezdése</Text>*/}
+                {/*</Pressable>*/}
                 {/*{exercises.map((title, idx) => (*/}
                 {/*  <Text key={idx}>*/}
                 {/*    {title.title}: {title.text} : {title.index}*/}

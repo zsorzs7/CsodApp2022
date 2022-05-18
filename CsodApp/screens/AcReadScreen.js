@@ -22,18 +22,10 @@ export const AcReadScreen = ({navigation}) => {
                 </View>
             </ScrollView>
             <View style={styles.menu}>
-                <TouchableOpacity>
-                    <Image style={styles.menuItem} source={require('../assets/read.png')}></Image>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Progress')
+                    navigation.navigate('Library')
                 }}>
-                    <Image style={styles.menuItem} source={require('../assets/home.png')}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Settings')
-                }}>
-                    <Image style={styles.menuItem} source={require('../assets/settings.png')}></Image>
+                    <Image style={styles.menuItem} source={require('../assets/back.png')}></Image>
                 </TouchableOpacity>
             </View>
         </View>
@@ -87,7 +79,7 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         height: 40,
-        width: 37
+        width: 40
     },
     container: {
         flex: 1,
