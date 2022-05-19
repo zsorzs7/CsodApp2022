@@ -27,9 +27,9 @@ export const AcFetchData = () => {
         }
         const userProgress = await AsyncStorage.getItem('userProgress');
         if (userProgress !== null) {
-            setProgress(userProgress);
+            // setProgress(userProgress);
         } else {
-            setProgress(0);
+            // setProgress(0);
         }
     };
 

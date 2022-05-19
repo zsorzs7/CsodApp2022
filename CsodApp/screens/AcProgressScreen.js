@@ -3,6 +3,7 @@ import {View, StyleSheet, Text, ScrollView, Pressable, Image, TouchableOpacityCo
 import {useStoreState, useStoreActions} from "easy-peasy";
 import {AcFetchData} from "../components/AcFetchData";
 import {TouchableOpacity} from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const AcProgressScreen = ({navigation}) => {
@@ -13,11 +14,16 @@ export const AcProgressScreen = ({navigation}) => {
     const setCurrentlyViewedExercise = useStoreActions((actions) => actions.setCurrentlyViewedExercise);
     const setLastRouteProgress = useStoreActions((actions) => actions.setLastRouteProgress);
 
-    const addProgressOnScreen = () => {
+    const addProgressOnScreen = async () => {
         if (userProgress < exercises.length - 1) {
             addProgress();
+            // await saveProgressToAsyncStorage(currentlyViewed);
             setCurrentlyViewed(currentlyViewed + 1)
         }
+    }
+
+    const saveProgressToAsyncStorage = async (progress) => {
+      await AsyncStorage.setItem('userProgress', progress);
     }
 
     const viewPrevious = () => {
@@ -54,7 +60,7 @@ export const AcProgressScreen = ({navigation}) => {
             <AcFetchData></AcFetchData>
             <ScrollView>
                 {exercises.length ?
-                    <Text style={styles.exerciseNumber}>{exercises[currentlyViewed].index + 1}. GYAKORLAT {currentlyViewed} {userProgress} {exercises.length} </Text> :
+                    <Text style={styles.exerciseNumber}>{exercises[currentlyViewed].index + 1}. GYAKORLAT</Text> :
                     <Text></Text>}
                 {exercises.length ? <Text style={styles.exerciseTitle}>{exercises[currentlyViewed].title}</Text> :
                     <Text></Text>}
@@ -76,23 +82,6 @@ export const AcProgressScreen = ({navigation}) => {
                     </TouchableOpacity>
                     }
                 </View>
-
-                {/*<Image></Image>*/}
-                {/*<Text style={styles.logoTextParts}>*/}
-                {/*    <Text style={styles.logoTextPartsOne}>*/}
-                {/*        PROG*/}
-                {/*    </Text>*/}
-                {/*    <Text style={styles.logoTextPartsTwo}>*/}
-                {/*        RESS*/}
-                {/*    </Text>*/}
-                {/*</Text>*/}
-                {/*<Pressable style={styles.button} title="Kezdés">*/}
-                {/*    <Text style={styles.text}>Kurzus kezdése</Text>*/}
-                {/*</Pressable>*/}
-                {/*{exercises.map((title, idx) => (*/}
-                {/*  <Text key={idx}>*/}
-                {/*    {title.title}: {title.text} : {title.index}*/}
-                {/*  </Text>*/}
             </ScrollView>
             <View style={styles.menu}>
                 <TouchableOpacity onPress={() => {

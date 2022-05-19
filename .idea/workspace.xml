@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74f3c1a6-68a5-419f-be46-30de429dfc76" name="Changes" comment="CSODAPP-13 deprecated components and titles set to asyncstorage">
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/alarm-on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/expand.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/next.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/view-next.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcLibraryScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcLibraryScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcReadScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcReadScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CsodApp/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/store/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +57,7 @@
       <workItem from="1646937507455" duration="667000" />
       <workItem from="1652085271504" duration="7122000" />
       <workItem from="1652170735479" duration="18000" />
-      <workItem from="1652990949250" duration="7724000" />
+      <workItem from="1652990949250" duration="8239000" />
     </task>
     <task id="LOCAL-00001" summary="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <created>1652089971446</created>
