@@ -8,10 +8,11 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 export const AcLibraryScreen = ({navigation}) => {
     const exercises = useStoreState((state) => state.exercises);
     const setCurrentlyViewedExercise = useStoreActions((actions) => actions.setCurrentlyViewedExercise);
-
+    const setLastRouteRead = useStoreActions((actions) => actions.setLastRouteRead);
 
     const navigateToExercise = (id) => {
         setCurrentlyViewedExercise(id);
+        setLastRouteRead();
         navigation.navigate('Read');
     }
 
@@ -23,14 +24,14 @@ export const AcLibraryScreen = ({navigation}) => {
                     <Text style={styles.screenTitle}>Könyvtár</Text>
                     {exercises.map((title, idx) => (
                         title.title ?
-                            <Pressable key={idx + '-library'} onPress={() => {navigateToExercise(idx)}} style={(idx === exercises.length - 1) ? styles.borderlessTitleContainer : styles.titleContainer }>
+                            <TouchableOpacity key={idx + '-library'} onPress={() => {navigateToExercise(idx)}} style={(idx === exercises.length - 1) ? styles.borderlessTitleContainer : styles.titleContainer }>
                                 <Text style={styles.titleItemId}>
                                     {title.index + 1}.
                                 </Text>
                                 <Text style={styles.titleItemText}>
                                     {title.title}
                                 </Text>
-                            </Pressable> : <Text></Text>))}
+                            </TouchableOpacity> : <Text></Text>))}
                 </View>
             </ScrollView>
             <View style={styles.menu}>

@@ -11,6 +11,9 @@ export default createStore(
         addProgress: action((state) => {
             state.progress += 1;
         }),
+        setProgress: action((state, progress) => {
+            state.progress = progress;
+        }),
         /* DEPRECATED */
 
         exercises: [],
@@ -21,6 +24,13 @@ export default createStore(
         currentlyViewedExercise: 0,
         setCurrentlyViewedExercise: action((state, exercise) => {
             state.currentlyViewedExercise = exercise;
+        }),
+        lastRoute: 'read',
+        setLastRouteRead: action((state) => {
+            state.lastRoute = 'read';
+        }),
+        setLastRouteProgress: action((state) => {
+            state.lastRoute = 'progress';
         }),
     })
 );

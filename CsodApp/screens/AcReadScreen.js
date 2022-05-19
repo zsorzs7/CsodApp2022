@@ -8,6 +8,7 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 export const AcReadScreen = ({navigation}) => {
     const exercises = useStoreState((state) => state.exercises);
     const currentlyViewedExercise = useStoreState((state) => state.currentlyViewedExercise);
+    const lastRoute = useStoreState((state) => state.lastRoute);
 
     return (
         <View style={styles.container}>
@@ -23,7 +24,11 @@ export const AcReadScreen = ({navigation}) => {
             </ScrollView>
             <View style={styles.menu}>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Library')
+                    if(lastRoute === 'read') {
+                        navigation.navigate('Library');
+                    } else {
+                        navigation.navigate('Progress');
+                    }
                 }}>
                     <Image style={styles.menuItem} source={require('../assets/back.png')}></Image>
                 </TouchableOpacity>

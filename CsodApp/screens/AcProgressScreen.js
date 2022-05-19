@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {View, StyleSheet, Text, ScrollView, Pressable, Image} from "react-native";
+import {View, StyleSheet, Text, ScrollView, Pressable, Image, TouchableOpacityComponent} from "react-native";
 import {useStoreState, useStoreActions} from "easy-peasy";
 import {AcFetchData} from "../components/AcFetchData";
 import {TouchableOpacity} from "react-native-gesture-handler";
@@ -7,12 +7,77 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 
 export const AcProgressScreen = ({navigation}) => {
     const exercises = useStoreState((state) => state.exercises);
+    const userProgress = useStoreState((state) => state.progress);
+    const [currentlyViewed, setCurrentlyViewed] = useState(userProgress);
+    const addProgress = useStoreActions((actions) => actions.addProgress);
+    const setCurrentlyViewedExercise = useStoreActions((actions) => actions.setCurrentlyViewedExercise);
+    const setLastRouteProgress = useStoreActions((actions) => actions.setLastRouteProgress);
+
+    const addProgressOnScreen = () => {
+        if (userProgress < exercises.length - 1) {
+            addProgress();
+            setCurrentlyViewed(currentlyViewed + 1)
+        }
+    }
+
+    const viewPrevious = () => {
+        if (currentlyViewed > 0) {
+            setCurrentlyViewed(currentlyViewed - 1);
+        }
+    }
+
+    const viewNext = () => {
+        if (currentlyViewed <= exercises.length && currentlyViewed <= userProgress) {
+            setCurrentlyViewed(currentlyViewed + 1);
+        }
+    }
+
+    const expandExercise = () => {
+        setCurrentlyViewedExercise(currentlyViewed);
+        setLastRouteProgress();
+        navigation.navigate('Read');
+    }
+
+    const backIconStyle = {
+        width: 42,
+        height: 42,
+        opacity: currentlyViewed ? 1 : 0.2
+    };
 
     return (
         <View style={styles.container}>
+            <View style={styles.alarmContainer}>
+                <TouchableOpacity>
+                    <Image style={styles.alarmIcon} source={require('../assets/alarm-on.png')}></Image>
+                </TouchableOpacity>
+            </View>
             <AcFetchData></AcFetchData>
             <ScrollView>
-                <Image></Image>
+                {exercises.length ?
+                    <Text style={styles.exerciseNumber}>{exercises[currentlyViewed].index + 1}. GYAKORLAT {currentlyViewed} {userProgress} {exercises.length} </Text> :
+                    <Text></Text>}
+                {exercises.length ? <Text style={styles.exerciseTitle}>{exercises[currentlyViewed].title}</Text> :
+                    <Text></Text>}
+                <View style={styles.exerciseIcons}>
+                    <TouchableOpacity onPress={() => viewPrevious()}>
+                        <Image style={backIconStyle} source={require('../assets/back.png')}></Image>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => expandExercise()}>
+                        <Image style={styles.expandIcon} source={require('../assets/expand.png')}></Image>
+                    </TouchableOpacity>
+                    {currentlyViewed === userProgress ? <TouchableOpacity onPress={() => {
+                        addProgressOnScreen();
+                    }}>
+                        <Image style={styles.nextIcon} source={require('../assets/next.png')}></Image>
+                    </TouchableOpacity> : <TouchableOpacity onPress={() => {
+                        viewNext();
+                    }}>
+                        <Image style={styles.nextIcon} source={require('../assets/view-next.png')}></Image>
+                    </TouchableOpacity>
+                    }
+                </View>
+
+                {/*<Image></Image>*/}
                 {/*<Text style={styles.logoTextParts}>*/}
                 {/*    <Text style={styles.logoTextPartsOne}>*/}
                 {/*        PROG*/}
@@ -29,17 +94,21 @@ export const AcProgressScreen = ({navigation}) => {
                 {/*    {title.title}: {title.text} : {title.index}*/}
                 {/*  </Text>*/}
             </ScrollView>
-                <View style={styles.menu}>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Library')}}>
+            <View style={styles.menu}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Library')
+                }}>
                     <Image style={styles.menuItem} source={require('../assets/read.png')}></Image>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
+                </TouchableOpacity>
+                <TouchableOpacity>
                     <Image style={styles.menuItem} source={require('../assets/home.png')}></Image>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Settings')}}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Settings')
+                }}>
                     <Image style={styles.menuItem} source={require('../assets/settings.png')}></Image>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -66,6 +135,33 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0
     },
+    alarmContainer: {
+        height: 60,
+        width: 60,
+        position: "absolute",
+        right: 20,
+        top: 45,
+    },
+    alarmIcon: {
+        height: 60,
+        width: 60,
+        opacity: 0.4
+    },
+    exerciseNumber: {
+        textAlign: 'center',
+        paddingTop: 200,
+        fontSize: 20,
+        paddingBottom: 18
+    },
+    exerciseTitle: {
+        fontSize: 19,
+        fontWeight: '700',
+        paddingBottom: 18,
+        textAlign: 'center',
+        width: 260,
+        maxWidth: 260,
+        height: 70
+    },
     menuItem: {
         height: 40,
         width: 37
@@ -79,18 +175,26 @@ const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: '#F9F9F9'
     },
-    logoTextParts: {
-        paddingBottom: 40
+    exerciseIcons: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 28,
+        width: 260,
+        maxWidth: 260
     },
-    logoTextPartsOne: {
-        fontSize: 40,
-        fontWeight: '700',
-        color: '#9E99ED'
+    backIcon: {
+        width: 42,
+        height: 42
     },
-    logoTextPartsTwo: {
-        fontSize: 40,
-        fontWeight: '700',
-        color: '#F7C4D5'
+    expandIcon: {
+        width: 60,
+        height: 60
+    },
+    nextIcon: {
+        width: 42,
+        height: 42
     },
     button: {
         alignItems: 'center',
