@@ -60,8 +60,8 @@ export const AcProgressScreen = ({navigation}) => {
         left: 0,
         top: 0,
         bottom: 0,
-        padding: 15,
-        zIndex: 3,
+        padding: 0,
+        zIndex: 10,
         display: 'none',
         borderRadius: 10,
         alignItems: 'center',
@@ -76,6 +76,28 @@ export const AcProgressScreen = ({navigation}) => {
         bottom: 0,
         width: '100%'
     }
+
+    const menu = {
+            display: modalOpen ? 'none' : 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: "space-around",
+            paddingTop: 12,
+            height: 64,
+            shadowColor: "#000",
+            shadowOffset: {
+            width: 0,
+                height: 12,
+        },
+        shadowOpacity: 0.58,
+            shadowRadius: 16.00,
+            elevation: 12,
+            backgroundColor: 'white',
+            position: modalOpen ? 'relative' : 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0
+    };
 
     return (
         <View style={styles.container}>
@@ -126,7 +148,7 @@ export const AcProgressScreen = ({navigation}) => {
                     }
                 </View>
             </ScrollView>
-            <View style={styles.menu}>
+            <View style={menu}>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('Library')
                 }}>
@@ -147,9 +169,10 @@ export const AcProgressScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     modalBox: {
-        top: '40%',
+        bottom: 0,
         padding: 20,
-        width: '95%',
+        paddingBottom: 30,
+        width: '100%',
         backgroundColor: 'white',
         shadowColor: "#000",
         shadowOffset: {
@@ -158,14 +181,15 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.58,
         shadowRadius: 16.00,
-        elevation: 2,
-        borderRadius: 10,
+        elevation: 12,
+        borderRadius: 0,
+        position: "absolute"
     },
     modalText: {
         fontWeight: '700',
         fontSize: 20,
         textAlign: 'center',
-        marginBottom: 15,
+        marginBottom: 10,
         color: 'black'
     },
     menu: {
@@ -273,7 +297,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#9E99ED',
-        marginLeft: 7
+        marginLeft: 7,
+        borderColor: '#9E99ED',
+        borderWidth: 1,
+        borderStyle: 'solid',
     },
     modalNoButton: {
         alignItems: 'center',
@@ -282,6 +309,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 10,
         elevation: 3,
+        borderColor: '#9E99ED',
+        borderWidth: 1,
+        borderStyle: 'solid',
         backgroundColor: 'white',
         marginRight: 7
     },
