@@ -82,7 +82,7 @@ export const AcProgressScreen = ({navigation}) => {
             <View style={modalDisplay}>
                 <BlurView intensity={100} tint="light" style={modalStyle}>
                     <View style={styles.modalBox}>
-                        <Text style={styles.modalText}>Biztosan végeztél mára?</Text>
+                        <Text style={styles.modalText}>Végeztél mára?</Text>
                         <View style={styles.modalButtonContainer}>
                             <TouchableOpacity onPress={() => {setModalOpen(false)}} style={styles.modalNoButton}>
                                 <Text style={styles.textNoButton}>Nem</Text>
@@ -165,7 +165,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 20,
         textAlign: 'center',
-        marginBottom: 15
+        marginBottom: 15,
+        color: 'black'
     },
     menu: {
         display: 'flex',
@@ -272,7 +273,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: '#9E99ED',
-        marginLeft: 5
+        marginLeft: 7
     },
     modalNoButton: {
         alignItems: 'center',
@@ -282,7 +283,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
         backgroundColor: 'white',
-        marginRight: 5
+        marginRight: 7
     },
     text: {
         fontSize: 16,
