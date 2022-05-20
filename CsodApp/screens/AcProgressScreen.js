@@ -4,6 +4,7 @@ import {useStoreState, useStoreActions} from "easy-peasy";
 import {AcFetchData} from "../components/AcFetchData";
 import {TouchableOpacity} from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {BlurView} from "expo-blur";
 
 
 export const AcProgressScreen = ({navigation}) => {
@@ -14,16 +15,20 @@ export const AcProgressScreen = ({navigation}) => {
     const setCurrentlyViewedExercise = useStoreActions((actions) => actions.setCurrentlyViewedExercise);
     const setLastRouteProgress = useStoreActions((actions) => actions.setLastRouteProgress);
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+
     const addProgressOnScreen = async () => {
         if (userProgress < exercises.length - 1) {
             addProgress();
             // await saveProgressToAsyncStorage(currentlyViewed);
-            setCurrentlyViewed(currentlyViewed + 1)
+            setCurrentlyViewed(currentlyViewed + 1);
+            setModalOpen(false);
         }
     }
 
     const saveProgressToAsyncStorage = async (progress) => {
-      await AsyncStorage.setItem('userProgress', progress);
+        await AsyncStorage.setItem('userProgress', progress);
     }
 
     const viewPrevious = () => {
@@ -50,8 +55,45 @@ export const AcProgressScreen = ({navigation}) => {
         opacity: currentlyViewed ? 1 : 0.2
     };
 
+    const modalStyle = {
+        position: modalOpen ? 'absolute' : 'relative',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        padding: 15,
+        zIndex: 3,
+        display: 'none',
+        borderRadius: 10,
+        alignItems: 'center',
+        width: '100%'
+    }
+
+    const modalDisplay = {
+        display: modalOpen ? 'none' : 'flex',
+        position: modalOpen ? 'absolute' : 'relative',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        width: '100%'
+    }
+
     return (
         <View style={styles.container}>
+            <View style={modalDisplay}>
+                <BlurView intensity={100} tint="light" style={modalStyle}>
+                    <View style={styles.modalBox}>
+                        <Text style={styles.modalText}>Biztosan végeztél mára?</Text>
+                        <View style={styles.modalButtonContainer}>
+                            <TouchableOpacity onPress={() => {setModalOpen(false)}} style={styles.modalNoButton}>
+                                <Text style={styles.textNoButton}>Nem</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalYesButton} onPress={() => {addProgressOnScreen()}}>
+                                <Text style={styles.text}>Igen</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </BlurView>
+            </View>
             <View style={styles.alarmContainer}>
                 <TouchableOpacity>
                     <Image style={styles.alarmIcon} source={require('../assets/alarm-on.png')}></Image>
@@ -72,7 +114,8 @@ export const AcProgressScreen = ({navigation}) => {
                         <Image style={styles.expandIcon} source={require('../assets/expand.png')}></Image>
                     </TouchableOpacity>
                     {currentlyViewed === userProgress ? <TouchableOpacity onPress={() => {
-                        addProgressOnScreen();
+                        // addProgressOnScreen();
+                        setModalOpen(true);
                     }}>
                         <Image style={styles.nextIcon} source={require('../assets/next.png')}></Image>
                     </TouchableOpacity> : <TouchableOpacity onPress={() => {
@@ -103,6 +146,27 @@ export const AcProgressScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+    modalBox: {
+        top: '40%',
+        padding: 20,
+        width: '95%',
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        elevation: 2,
+        borderRadius: 10,
+    },
+    modalText: {
+        fontWeight: '700',
+        fontSize: 20,
+        textAlign: 'center',
+        marginBottom: 15
+    },
     menu: {
         display: 'flex',
         flexDirection: 'row',
@@ -194,11 +258,44 @@ const styles = StyleSheet.create({
         elevation: 3,
         backgroundColor: '#9E99ED',
     },
+    modalButtonContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 10,
+        justifyContent: 'center'
+    },
+    modalYesButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: '#9E99ED',
+        marginLeft: 5
+    },
+    modalNoButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: 'white',
+        marginRight: 5
+    },
     text: {
         fontSize: 16,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'white',
+    },
+    textNoButton: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: '#9E99ED',
     },
 });
