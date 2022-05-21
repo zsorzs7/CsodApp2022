@@ -32,5 +32,12 @@ export default createStore(
         setLastRouteProgress: action((state) => {
             state.lastRoute = 'progress';
         }),
+        doneExercisesToday: 0,
+        addDoneExercise: action((state) => {
+            state.doneExercisesToday += 1;
+        }),
+        resetDoneExercisesToday: action((state) => {
+            state.doneExercisesToday = 0;
+        })
     })
 );

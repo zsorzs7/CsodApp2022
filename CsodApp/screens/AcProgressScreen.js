@@ -5,6 +5,12 @@ import {AcFetchData} from "../components/AcFetchData";
 import {TouchableOpacity} from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {BlurView} from "expo-blur";
+import {Platform} from "react-native";
+import {AcTimer} from "../components/AcTimer";
+import {Dimensions} from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 
 export const AcProgressScreen = ({navigation}) => {
@@ -14,6 +20,7 @@ export const AcProgressScreen = ({navigation}) => {
     const addProgress = useStoreActions((actions) => actions.addProgress);
     const setCurrentlyViewedExercise = useStoreActions((actions) => actions.setCurrentlyViewedExercise);
     const setLastRouteProgress = useStoreActions((actions) => actions.setLastRouteProgress);
+    const resetDoneExercisesToday = useStoreActions((actions) => actions.resetDoneExercisesToday)
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -24,6 +31,7 @@ export const AcProgressScreen = ({navigation}) => {
             // await saveProgressToAsyncStorage(currentlyViewed);
             setCurrentlyViewed(currentlyViewed + 1);
             setModalOpen(false);
+            resetDoneExercisesToday();
         }
     }
 
@@ -52,7 +60,7 @@ export const AcProgressScreen = ({navigation}) => {
     const backIconStyle = {
         width: 42,
         height: 42,
-        opacity: currentlyViewed ? 1 : 0.2
+        opacity: currentlyViewed ? 1 : 0.4
     };
 
     const modalStyle = {
@@ -77,26 +85,32 @@ export const AcProgressScreen = ({navigation}) => {
         width: '100%'
     }
 
+    const nextIconStyle = {
+        width: 42,
+        height: 42,
+        opacity: userProgress === exercises.length - 1 ? 0.4 : 1
+    };
+
     const menu = {
-            display: modalOpen ? 'none' : 'flex',
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: "space-around",
-            paddingTop: 12,
-            height: 64,
-            shadowColor: "#000",
-            shadowOffset: {
+        display: modalOpen ? 'none' : 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: "space-around",
+        paddingTop: 12,
+        height: 64,
+        shadowColor: "#000",
+        shadowOffset: {
             width: 0,
-                height: 12,
+            height: 12,
         },
         shadowOpacity: 0.58,
-            shadowRadius: 16.00,
-            elevation: 12,
-            backgroundColor: 'white',
-            position: modalOpen ? 'relative' : 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0
+        shadowRadius: 16.00,
+        elevation: 12,
+        backgroundColor: 'white',
+        position: modalOpen ? 'relative' : 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0
     };
 
     return (
@@ -106,10 +120,14 @@ export const AcProgressScreen = ({navigation}) => {
                     <View style={styles.modalBox}>
                         <Text style={styles.modalText}>Végeztél mára?</Text>
                         <View style={styles.modalButtonContainer}>
-                            <TouchableOpacity onPress={() => {setModalOpen(false)}} style={styles.modalNoButton}>
+                            <TouchableOpacity onPress={() => {
+                                setModalOpen(false)
+                            }} style={styles.modalNoButton}>
                                 <Text style={styles.textNoButton}>Nem</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.modalYesButton} onPress={() => {addProgressOnScreen()}}>
+                            <TouchableOpacity style={styles.modalYesButton} onPress={() => {
+                                addProgressOnScreen()
+                            }}>
                                 <Text style={styles.text}>Igen</Text>
                             </TouchableOpacity>
                         </View>
@@ -122,7 +140,12 @@ export const AcProgressScreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             <AcFetchData></AcFetchData>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{
+                marginLeft: 0,
+                width: screenWidth,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }} contentInset={{top: 0, left: 0, bottom: 0, right: 0}}>
                 {exercises.length ?
                     <Text style={styles.exerciseNumber}>{exercises[currentlyViewed].index + 1}. GYAKORLAT</Text> :
                     <Text></Text>}
@@ -137,9 +160,16 @@ export const AcProgressScreen = ({navigation}) => {
                     </TouchableOpacity>
                     {currentlyViewed === userProgress ? <TouchableOpacity onPress={() => {
                         // addProgressOnScreen();
-                        setModalOpen(true);
+                        if (userProgress === exercises.length - 1) {
+                            return;
+                        }
+                        if (Platform.OS !== 'ios') {
+                            setModalOpen(true);
+                        } else {
+                            addProgressOnScreen();
+                        }
                     }}>
-                        <Image style={styles.nextIcon} source={require('../assets/next.png')}></Image>
+                        <Image style={[nextIconStyle]} source={require('../assets/next.png')}></Image>
                     </TouchableOpacity> : <TouchableOpacity onPress={() => {
                         viewNext();
                     }}>
@@ -147,6 +177,8 @@ export const AcProgressScreen = ({navigation}) => {
                     </TouchableOpacity>
                     }
                 </View>
+                {currentlyViewed === userProgress ? <AcTimer></AcTimer> : <View style={{height: screenHeight / 2}}></View>
+                }
             </ScrollView>
             <View style={menu}>
                 <TouchableOpacity onPress={() => {
@@ -227,7 +259,7 @@ const styles = StyleSheet.create({
     },
     exerciseNumber: {
         textAlign: 'center',
-        paddingTop: 200,
+        paddingTop: 150,
         fontSize: 20,
         paddingBottom: 18
     },
@@ -238,7 +270,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: 260,
         maxWidth: 260,
-        height: 70
+        height: 70,
+        marginBottom: 10
     },
     menuItem: {
         height: 40,
@@ -251,14 +284,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "center",
         height: "100%",
-        backgroundColor: '#F9F9F9'
+        backgroundColor: 'white'
     },
     exerciseIcons: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        marginTop: 28,
         width: 260,
         maxWidth: 260
     },
