@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74f3c1a6-68a5-419f-be46-30de429dfc76" name="Changes" comment="CSODAPP-13 deprecated components and titles set to asyncstorage">
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/checkbox-checked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/checkbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/components/AcTimer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CsodApp/assets/start.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CsodApp/assets/stop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CsodApp/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/components/AcTimer.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/components/AcTimer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,7 @@
       <workItem from="1652990949250" duration="8239000" />
       <workItem from="1653030949382" duration="379000" />
       <workItem from="1653079694104" duration="6227000" />
-      <workItem from="1653121566199" duration="9370000" />
+      <workItem from="1653121566199" duration="13086000" />
     </task>
     <task id="LOCAL-00001" summary="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <created>1652089971446</created>
