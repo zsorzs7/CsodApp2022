@@ -28,14 +28,16 @@ export const AcFetchData = () => {
         }
         const userProgress = await AsyncStorage.getItem('userProgress');
         if (userProgress !== null) {
-            setProgress(JSON.parse(userProgress));
+            // setProgress(JSON.parse(userProgress))
+            setProgress(0);
         } else {
             setProgress(0);
         }
 
         const doneExercisesToday = await AsyncStorage.getItem('doneExercisesToday');
         if (doneExercisesToday !== null) {
-            setDoneExercisesToday(JSON.parse(doneExercisesToday));
+            // setDoneExercisesToday(JSON.parse(doneExercisesToday));
+            setDoneExercisesToday(0);
         } else {
             setDoneExercisesToday(0);
         }

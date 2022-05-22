@@ -8,6 +8,7 @@ import {BlurView} from "expo-blur";
 import {Platform} from "react-native";
 import {Dimensions} from 'react-native';
 import {CountdownCircleTimer} from 'react-native-countdown-circle-timer'
+import SoundPlayer from 'react-native-sound-player'
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -24,6 +25,11 @@ export const AcTimer = () => {
 
     const stepUpToday = async () => {
         addDoneExercise();
+        try {
+            SoundPlayer.playUrl('../assets/sounds/notification1.mp3');
+        } catch (e) {
+            console.log(`cannot play the sound file`, e)
+        }
         await setDoneExercisesAsyncStorage(stateDoneExercises + 1);
         setStateDoneExercises(stateDoneExercises + 1);
     }
