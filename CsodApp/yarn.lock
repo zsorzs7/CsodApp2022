@@ -6217,6 +6217,11 @@ react-native-shadow-2@^6.0.5:
   dependencies:
     polished "^4.1.4"
 
+react-native-sound-player@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/react-native-sound-player/-/react-native-sound-player-0.12.1.tgz#d8e9dc67d67386c6dfe0607e44afffa391cb54fe"
+  integrity sha512-jkJNz2c1dHV4nQMurR/3asYgZdZYzqmNNkyWmezxmwBBGPAUMiE7REoqUjSxumIOV5R0MzT8efBzl2f4d09iVQ==
+
 react-native-svg@^12.3.0:
   version "12.3.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.3.0.tgz#40f657c5d1ee366df23f3ec8dae76fd276b86248"

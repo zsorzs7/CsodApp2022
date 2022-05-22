@@ -38,6 +38,9 @@ export default createStore(
         }),
         resetDoneExercisesToday: action((state) => {
             state.doneExercisesToday = 0;
-        })
+        }),
+        setDoneExercisesToday: action((state, number) => {
+            state.doneExercisesToday = number;
+        }),
     })
 );

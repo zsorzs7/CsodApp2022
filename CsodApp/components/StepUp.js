@@ -30,7 +30,7 @@ export const StepUp = () => {
             const value = await AsyncStorage.getItem('progress');
             if(value !== null) {
                 savedProgress = 'no progress saved'
-                setProgressFromStorage(value);
+                setProgressFromStorage(JSON.parse(value));
             }
             const titles = await AsyncStorage.getItem('titles');
             if(titles !== null) {

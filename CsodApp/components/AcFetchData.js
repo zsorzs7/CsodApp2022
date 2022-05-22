@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 export const AcFetchData = () => {
     const setExercises = useStoreActions((actions) => actions.setExercises);
     const setProgress = useStoreActions((actions) => actions.setProgress);
+    const setDoneExercisesToday = useStoreActions((actions) => actions.setDoneExercisesToday);
     const getTitles = async () => {
         const db = getFirestore();
         const table = collection(db, "test4");
@@ -27,9 +28,16 @@ export const AcFetchData = () => {
         }
         const userProgress = await AsyncStorage.getItem('userProgress');
         if (userProgress !== null) {
-            // setProgress(userProgress);
+            setProgress(JSON.parse(userProgress));
         } else {
-            // setProgress(0);
+            setProgress(0);
+        }
+
+        const doneExercisesToday = await AsyncStorage.getItem('doneExercisesToday');
+        if (doneExercisesToday !== null) {
+            setDoneExercisesToday(JSON.parse(doneExercisesToday));
+        } else {
+            setDoneExercisesToday(0);
         }
     };
 

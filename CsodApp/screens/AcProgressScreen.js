@@ -28,15 +28,16 @@ export const AcProgressScreen = ({navigation}) => {
     const addProgressOnScreen = async () => {
         if (userProgress < exercises.length - 1) {
             addProgress();
-            // await saveProgressToAsyncStorage(currentlyViewed);
+            await saveProgressToAsyncStorage(currentlyViewed);
             setCurrentlyViewed(currentlyViewed + 1);
             setModalOpen(false);
             resetDoneExercisesToday();
+            await setDoneExercisesAsyncStorage(0);
         }
     }
 
     const saveProgressToAsyncStorage = async (progress) => {
-        await AsyncStorage.setItem('userProgress', progress);
+        await AsyncStorage.setItem('userProgress', JSON.stringify(progress + 1));
     }
 
     const viewPrevious = () => {
@@ -55,6 +56,15 @@ export const AcProgressScreen = ({navigation}) => {
         setCurrentlyViewedExercise(currentlyViewed);
         setLastRouteProgress();
         navigation.navigate('Read');
+    }
+
+    const setDoneExercisesAsyncStorage = async (number) => {
+        try {
+            await AsyncStorage.setItem('doneExercisesToday', JSON.stringify(number));
+        }
+        catch(e){
+            //
+        }
     }
 
     const backIconStyle = {
