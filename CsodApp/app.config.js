@@ -20,6 +20,7 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
+      "bundleIdentifier": "com.csodapp.csodapp"
     },
     android: {
       package: "com.csodapp.csodapp",

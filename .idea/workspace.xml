@@ -3,11 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="74f3c1a6-68a5-419f-be46-30de429dfc76" name="Changes" comment="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <change afterPath="$PROJECT_DIR$/CsodApp/android/app/src/main/res/raw/notification1.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CsodApp/assets/sounds/notification1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CsodApp/assets/radio-checked.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CsodApp/assets/radio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CsodApp/assets/sounds/notification2.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/app.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/app.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/components/AcTimer.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/components/AcTimer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcSettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcSettingsScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +44,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/gnovak/CsodApp2022/CsodApp/android/app/src/main/res/raw",
+    "last_opened_file_path": "/home/gnovak/CsodApp2022/CsodApp/assets",
     "nodejs_package_manager_path": "yarn",
     "ts.external.directory.path": "/snap/phpstorm/267/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
@@ -46,9 +52,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/CsodApp/android/app/src/main/res/raw" />
-      <recent name="$PROJECT_DIR$/CsodApp/assets/sounds" />
       <recent name="$PROJECT_DIR$/CsodApp/assets" />
+      <recent name="$PROJECT_DIR$/CsodApp/assets/sounds" />
+      <recent name="$PROJECT_DIR$/CsodApp/android/app/src/main/res/raw" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -66,7 +72,7 @@
       <workItem from="1653030949382" duration="379000" />
       <workItem from="1653079694104" duration="6227000" />
       <workItem from="1653121566199" duration="16701000" />
-      <workItem from="1653200238708" duration="3739000" />
+      <workItem from="1653200238708" duration="12872000" />
     </task>
     <task id="LOCAL-00001" summary="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <created>1652089971446</created>
@@ -95,16 +101,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CSODAPP-13 deprecated components and titles set to asyncstorage" />
     <option name="LAST_COMMIT_MESSAGE" value="CSODAPP-13 deprecated components and titles set to asyncstorage" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/CsodApp/screens/AcReadScreen.js</url>
-          <line>14</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -8,7 +8,7 @@ import {BlurView} from "expo-blur";
 import {Platform} from "react-native";
 import {Dimensions} from 'react-native';
 import {CountdownCircleTimer} from 'react-native-countdown-circle-timer'
-import SoundPlayer from 'react-native-sound-player'
+import { Audio } from "expo-av";
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -22,14 +22,25 @@ export const AcTimer = () => {
     const addDoneExercise = useStoreActions((actions) => actions.addDoneExercise);
     const [isPlaying, setIsPlaying] = useState(false);
     const [hasPlayed, setHasPlayed] = useState(0);
+    const [sound, setSound] = React.useState();
+
+    async function playSound() {
+        const { sound } = await Audio.Sound.createAsync(
+            require('../assets/sounds/notification2.wav')
+        );
+        setSound(sound);
+
+        await sound.playAsync(); }
+
+    React.useEffect(() => {
+        return sound
+            ? () => {
+                sound.unloadAsync(); }
+            : undefined;
+    }, [sound]);
 
     const stepUpToday = async () => {
         addDoneExercise();
-        try {
-            SoundPlayer.playUrl('../assets/sounds/notification1.mp3');
-        } catch (e) {
-            console.log(`cannot play the sound file`, e)
-        }
         await setDoneExercisesAsyncStorage(stateDoneExercises + 1);
         setStateDoneExercises(stateDoneExercises + 1);
     }
@@ -49,7 +60,7 @@ export const AcTimer = () => {
                 <CountdownCircleTimer
                     key={hasPlayed}
                     isPlaying={isPlaying}
-                    duration={30}
+                    duration={10}
                     colors={['#9E99ED', '#F7C4D5']}
                     strokeWidth={18}
                     trailColor={'white'}
@@ -58,6 +69,7 @@ export const AcTimer = () => {
                         setIsPlaying(false);
                         setHasPlayed(hasPlayed + 1);
                         stepUpToday();
+                        playSound();
                         return {shouldRepeat: true, delay: 1.5}
                     }}
                 >
