@@ -162,10 +162,10 @@ export const AcSettingsScreen = ({navigation}) => {
                         <TouchableOpacity style={styles.titleItemText}>
                             <TextInput
                                 style={{height: 38, width: 66, backgroundColor: 'white', borderRadius: 4, borderWidth: 1, borderColor: '#cccccc', borderStyle: 'solid', textAlign: 'center'}}
-                                // onEndEditing={text => { onChangeNumber(text.nativeEvent.text); setModalOpen(true); }}
+                                onEndEditing={text => { onChangeNumber(text.nativeEvent.text); setModalOpen(true); }}
                                 keyboardType="numeric"
                                 placeholder={(userProgress + 1) + ''}
-                                editable={false}
+                                // editable={false}
                             />
                         </TouchableOpacity>
                     </View>
