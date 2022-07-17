@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
-import {View, StyleSheet, Text, ScrollView, Pressable, Image, TextInput} from "react-native";
+import React, {useState, useEffect, useRef} from "react";
+import {View, StyleSheet, Text, ScrollView, Pressable, Image, TextInput, Platform} from "react-native";
 import {useStoreState, useStoreActions} from "easy-peasy";
 import {AcFetchData} from "../components/AcFetchData";
 import {TouchableOpacity} from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {BlurView} from "expo-blur";
-
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 
 export const AcSettingsScreen = ({navigation}) => {
     const exercises = useStoreState((state) => state.exercises);
@@ -16,6 +17,111 @@ export const AcSettingsScreen = ({navigation}) => {
     const resetDoneExercisesToday = useStoreActions((actions) => actions.resetDoneExercisesToday);
     const setProgress = useStoreActions((actions) => actions.setProgress);
 
+    /* region notification */
+
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+    const responseListener = useRef();
+
+
+    useEffect(async () => {
+        navigation.addListener('focus', async () => {
+            let notificationEnabled = await AsyncStorage.getItem('notificationEnabled');
+            if(JSON.parse(notificationEnabled)) {
+                setPushNotification(true);
+            }
+        });
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+            setNotification(notification);
+        });
+
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            // console.log(response);
+        });
+
+        return () => {
+            Notifications.removeNotificationSubscription(notificationListener.current);
+            Notifications.removeNotificationSubscription(responseListener.current);
+        };
+    }, [navigation]);
+
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+            shouldShowAlert: true,
+            shouldPlaySound: true,
+            shouldSetBadge: true,
+        }),
+    });
+
+    const notificationTriggers = [
+        { hour: 9, minute: 0, repeats: true },
+        { hour: 10, minute: 0, repeats: true },
+        { hour: 11, minute: 0, repeats: true },
+        { hour: 12, minute: 0, repeats: true },
+        { hour: 13, minute: 0, repeats: true },
+        { hour: 14, minute: 0, repeats: true },
+        { hour: 14, minute: 2, repeats: true },
+        { hour: 14, minute: 4, repeats: true },
+        { hour: 15, minute: 0, repeats: true },
+        { hour: 16, minute: 0, repeats: true },
+        { hour: 17, minute: 0, repeats: true },
+        { hour: 18, minute: 0, repeats: true },
+        { hour: 19, minute: 0, repeats: true },
+        { hour: 20, minute: 0, repeats: true },
+        { hour: 21, minute: 0, repeats: true }
+    ]
+
+    async function schedulePushNotification() {
+        try {
+            // for (const notification of notificationTriggers) {
+                await Notifications.scheduleNotificationAsync({
+                    content: {
+                        body: `${exercises[userProgress].title}`,
+                        title: `CsodApp | ${exercises[userProgress].index + 1}. gyakorlat`,
+                        // data: {data: 'goes here'},
+                    },
+                    trigger: notification
+                });
+            // }
+        } catch(e) {
+            //
+        }
+    }
+
+    async function registerForPushNotificationsAsync() {
+        let token;
+        if (Device.isDevice) {
+            const { status: existingStatus } = await Notifications.getPermissionsAsync();
+            let finalStatus = existingStatus;
+            if (existingStatus !== 'granted') {
+                const { status } = await Notifications.requestPermissionsAsync();
+                finalStatus = status;
+            }
+            if (finalStatus !== 'granted') {
+                return;
+            }
+            token = (await Notifications.getExpoPushTokenAsync()).data;
+            // console.log(token);
+        } else {
+            //
+        }
+
+        if (Platform.OS === 'android') {
+            Notifications.setNotificationChannelAsync('default', {
+                name: 'default',
+                importance: Notifications.AndroidImportance.MAX,
+                vibrationPattern: [0, 250, 250, 250],
+                lightColor: '#FF231F7C',
+            });
+        }
+
+        return token;
+    }
+
+    /* endregion */
 
     const [darkMode, setDarkMode] = useState(false);
     const [pushNotification, setPushNotification] = useState(false);
@@ -28,21 +134,30 @@ export const AcSettingsScreen = ({navigation}) => {
         setDarkMode(!darkMode);
     }
 
-    const togglePushNotification = () => {
-        setPushNotification(!pushNotification)
+    const togglePushNotification = async () => {
+        if(pushNotification) {
+            Notifications.cancelAllScheduledNotificationsAsync();
+            await AsyncStorage.setItem('notificationEnabled', JSON.stringify(false));
+        } else {
+            await schedulePushNotification();
+            await AsyncStorage.setItem('notificationEnabled', JSON.stringify(true));
+
+        }
+        setPushNotification(!pushNotification);
     }
 
     const [modalOpen, setModalOpen] = useState(false);
 
     const addProgressOnScreen = async () => {
-        // if (userProgress < exercises.length - 1) {
-            const saveToAsync = Number(number) - 1;
-            setProgress(saveToAsync);
-            await saveProgressToAsyncStorage(saveToAsync);
-            setModalOpen(false);
-            resetDoneExercisesToday();
-            await setDoneExercisesAsyncStorage(0);
-        // }
+            if (Number(number) && number < exercises.length - 1) {
+                const saveToAsync = Number(number) - 1;
+                setProgress(saveToAsync);
+                await saveProgressToAsyncStorage(saveToAsync);
+                setModalOpen(false);
+                resetDoneExercisesToday();
+                await setDoneExercisesAsyncStorage(0);
+                await AsyncStorage.setItem('cameFromSettings', JSON.stringify(true));
+            }
     }
 
     const setDoneExercisesAsyncStorage = async (number) => {
@@ -149,7 +264,7 @@ export const AcSettingsScreen = ({navigation}) => {
                         <Text style={styles.titleItemText}>
                             Értesítések
                         </Text>
-                        <TouchableOpacity style={styles.titleItemText} onPress={() => togglePushNotification()}>
+                        <TouchableOpacity style={styles.titleItemText} onPress={async () => { togglePushNotification();}}>
                             {pushNotification ?
                                 <Image style={{height: 38, width: 66}} source={require('../assets/radio-checked.png')}></Image> :
                                 <Image style={{height: 38, width: 66}} source={require('../assets/radio.png')}></Image>}

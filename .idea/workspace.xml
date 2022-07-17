@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="74f3c1a6-68a5-419f-be46-30de429dfc76" name="Changes" comment="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/app.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/app.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/components/AcFetchData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcProgressScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CsodApp/screens/AcSettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/AcSettingsScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/screens/ForgotPasswordScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/screens/ForgotPasswordScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsodApp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/CsodApp/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +41,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/gnovak/CsodApp2022",
+    "last_opened_file_path": "/home/gnovak/loginet/vue/whiskynet/server",
     "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "/snap/phpstorm/267/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/snap/phpstorm/272/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -65,7 +72,11 @@
       <workItem from="1653200238708" duration="16585000" />
       <workItem from="1653293554660" duration="738000" />
       <workItem from="1653297937976" duration="621000" />
-      <workItem from="1654325861725" duration="1146000" />
+      <workItem from="1654325861725" duration="13598000" />
+      <workItem from="1654700191841" duration="6662000" />
+      <workItem from="1654758988938" duration="1449000" />
+      <workItem from="1654762945002" duration="1215000" />
+      <workItem from="1654802023076" duration="1067000" />
     </task>
     <task id="LOCAL-00001" summary="CSODAPP-13 deprecated components and titles set to asyncstorage">
       <created>1652089971446</created>

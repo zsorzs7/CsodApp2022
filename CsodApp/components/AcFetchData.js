@@ -41,6 +41,8 @@ export const AcFetchData = () => {
         } else {
             setDoneExercisesToday(0);
         }
+
+        await AsyncStorage.setItem('cameFromSettings', JSON.stringify(false));
     };
 
     useEffect(() => {
